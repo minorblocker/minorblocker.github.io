@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>[MB]</title>
+    <title>MB</title>
     <link>https://localhost:3001/</link>
-    <description>Recent content on [MB]</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://localhost:3001/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent content on MB</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 01 May 2022 21:54:00 +0530</lastBuildDate><atom:link href="https://localhost:3001/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to setup Firebase Authentication with Vue Application</title>
+      <link>https://localhost:3001/posts/vue/vue-firebase/</link>
+      <pubDate>Sun, 01 May 2022 21:54:00 +0530</pubDate>
+      
+      <guid>https://localhost:3001/posts/vue/vue-firebase/</guid>
+      <description>Introduction Firebase provides a SDK to easily integrate the auth service into our web app.
+The user credentials are collected using the web app. The credentials are sent to firebase via SDK. Firebase takes care of storing the user information on registration and authentication.
+Goals  We want to implement an vue app with authentication.  User should be able to view only some sections our web app without authentication. If an unauthenticated user tries to view app sections which require authentication he will be redirected to the login page.</description>
+    </item>
+    
   </channel>
 </rss>
