@@ -1,24 +1,25 @@
 <!doctype html><html lang><head>
 <meta charset=utf-8>
 <link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
+<script src=https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js></script>
+<script>document.addEventListener("DOMContentLoaded",function(){anchors.options={placement:"left",visible:"always",icon:"#"},anchors.add()})</script>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>How to setup Firebase Authentication with Vue Application - MB</title><meta name=description content="Vue firebase -------------------------------------">
-<meta name=author content="Subhasis Maity">
+<title>How to setup Firebase Authentication with Vue Application - MB</title><meta name=author content="Subhasis Maity">
 <meta property="og:title" content="How to setup Firebase Authentication with Vue Application">
-<meta property="og:description" content="Vue firebase -------------------------------------">
+<meta property="og:description" content="Authentication is one of the basic requirement of all web application. We will setup app authentication with firebase. Along the way we will discover how easy it is to integrate once we understand the different pieces work together.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://minorblocker.com/posts/vue/firebase/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-05-01T21:54:00+05:30">
 <meta property="article:modified_time" content="2022-05-01T21:54:00+05:30">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="How to setup Firebase Authentication with Vue Application">
-<meta name=twitter:description content="Vue firebase -------------------------------------">
-<link rel=stylesheet href=/style.min.8a93a1cd86a842cc65cdbb4240ee72cd9c0d3e1f888d40a56a73abb5616790a5878892963ed6f75a45e9417e670f03d9fa5ad6e0fd8bed1bc6df0a4def4cbf0b.css integrity="sha512-ipOhzYaoQsxlzbtCQO5yzZwNPh+IjUClanOrtWFnkKWHiJKWPtb3WkXpQX5nDwPZ+lrW4P2L7RvG3wpN70y/Cw==">
+<meta name=twitter:description content="Authentication is one of the basic requirement of all web application. We will setup app authentication with firebase. Along the way we will discover how easy it is to integrate once we understand the different pieces work together.">
+<link rel=stylesheet href=/style.min.818964c82ef6092f009bed1f5b82443c6c095b474740dc20501c155e70bced9e4a1257835512703edca1a7a33a92c9707874a34a429d6acc07adc20af6444622.css integrity="sha512-gYlkyC72CS8Am+0fW4JEPGwJW0dHQNwgUBwVXnC87Z5KEleDVRJwPtyhp6M6kslweHSjSkKdaswHrcIK9kRGIg==">
 <script>localStorage.theme==="dark"||!("theme"in localStorage)&&window.matchMedia("(prefers-color-scheme: dark)").matches?document.documentElement.setAttribute("data-theme","dark"):document.documentElement.setAttribute("data-theme","light")</script>
 <script defer src=/js/header.7a2a109ec3782c57bad0332b662f8a5f41765505936b69868eb8bd5241de9daf23c388e82ca1831f6d09935013dcb9f71bfa7face3975880c1076028b7b0a6e1.js integrity="sha512-eioQnsN4LFe60DMrZi+KX0F2VQWTa2mGjri9UkHena8jw4joLKGDH20Jk1AT3Ln3G/p/rOOXWIDBB2Aot7Cm4Q=="></script>
 <script defer src=/js/zooming.6f103e36197400ebc24f38c2fbe29c0f3de23f4f42b3c1020f9b426d3b25cc453edb5cbf7060d3d0b9166b8fa40f47add4ca6ba6d32f0acb9126153d16b57f7c.js integrity="sha512-bxA+Nhl0AOvCTzjC++KcDz3iP09Cs8ECD5tCbTslzEU+21y/cGDT0LkWa4+kD0et1MprptMvCsuRJhU9FrV/fA=="></script>
 <script defer src=/js/builtin-copy.56e07a74dd440b068ab36af35542ed8960865686c19fb809f38436877ac081570612cc8a913650b0c0e3073a336680c5df960e73bf7b1de83dc6aa996f2db858.js integrity="sha512-VuB6dN1ECwaKs2rzVULtiWCGVobBn7gJ84Q2h3rAgVcGEsyKkTZQsMDjBzozZoDF35YOc797Heg9xqqZby24WA=="></script>
-<script defer src=/js/search-.970b477e828ea877d5f60fb1da94200d28b58d73d765d428c35aeab2f13bfcbe4563ab3054f6e8773ee6030cd4857bab065a6f848e8cf4f1e7b29c887d804423.js integrity="sha512-lwtHfoKOqHfV9g+x2pQgDSi1jXPXZdQow1rqsvE7/L5FY6swVPbodz7mAwzUhXurBlpvhI6M9PHnspyIfYBEIw=="></script>
+<script defer src=/js/search-.13a6a534b6daa07f22c87c5964b4e74069076108b812d7ccc5098fd6e6da540872c3835bb29b4fcb05b20f84c252e5f3a4ac9c47b3db2be3bc2b8beccfa29272.js integrity="sha512-E6alNLbaoH8iyHxZZLTnQGkHYQi4EtfMxQmP1ubaVAhyw4NbsptPywWyD4TCUuXzpKycR7PbK+O8K4vsz6KScg=="></script>
 </head><body>
 <main><header>
 <div class=brand>
@@ -40,8 +41,8 @@
 <svg width="18" height="18" viewBox="0 0 24 24"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></svg>
 </div></div><div id=search_menu_results>
 </div></div></div></div></div></header><nav id=navbar class=pure-menu><ul class=pure-menu-list></ul></nav><div id=sidebar_canvas_overlay class=hidden></div><div id=sidebar class=close>
-<ul></ul></div><h1 class=post-title>How to setup Firebase Authentication with Vue Application</h1><div id=content class=content-margin>
-<details class=collapsible-menu-wrapper><summary class=collapsible-menu-type><span>Table of contents</span></summary><div class=collapsible-menu>
+<ul></ul></div><div id=content class=content-margin>
+<h1 class=post-title>How to setup Firebase Authentication with Vue Application</h1><details class=collapsible-menu-wrapper><summary class=collapsible-menu-type><span>Table of contents</span></summary><div class=collapsible-menu>
 <nav id=TableOfContents>
 <ul>
 <li><a href=#introduction>Introduction</a></li><li><a href=#goals>Goals</a></li><li><a href=#design>Design</a></li><li><a href=#implementation>Implementation</a>
@@ -52,14 +53,25 @@
 <h2 id=introduction>Introduction</h2><p>Firebase provides a SDK to easily integrate the auth service into our web app.</p><p>The user credentials are collected using the web app. The credentials are sent to firebase via SDK. Firebase takes care of storing the user information on registration and authentication.</p><h2 id=goals>Goals</h2><ol>
 <li>We want to implement an vue app with authentication.
 <ol>
-<li>User should be able to view only some sections our web app without authentication.</li><li>If an unauthenticated user tries to view app sections which require authentication he will be redirected to the login page.</li></ol></li></ol><h2 id=design>Design</h2><p><figure><img src=vue-firebase-routes.png><figcaption>
-<h4>Route Structure</h4></figcaption></figure>We will setup three <strong>routes</strong> to <strong>component</strong> mapping</p><ol>
-<li><code>/login</code> => Renders <code>&lt;/figure></code></li><li><code>/register</code> => Renders <code>&lt;/Register></code></li><li><code>/</code> => Renders <code>&lt;/Dashboard></code> or <code>&lt;Landing/></code></li></ol><p>User can access <code>&lt;Dashboard/></code> only after authentication.<br>
-Without authentication <code>/</code> will render <code>&lt;Landing/></code> component. With authentication <code>/</code> will render <code>&lt;Dashboard/></code> component.</p><h2 id=implementation>Implementation</h2><h3 id=prepare-the-environment>Prepare the Environment</h3><ol>
+<li>User should be able to view only some sections our web app without authentication.</li><li>If an unauthenticated user tries to view app sections which require authentication he will be redirected to the login page.</li></ol></li></ol><h2 id=design>Design</h2><figure><img src=vue-firebase-routes-1.png alt=routes><figcaption>
+<p>routes</p></figcaption></figure><p>We will setup three <strong>routes</strong> to <strong>component</strong> mapping</p><pre tabindex=0><code>/         =&gt; &lt;Dashboard/&gt; or &lt;Landing/&gt;
+/login    =&gt; &lt;Login/&gt;
+/register =&gt; &lt;Register/&gt;
+</code></pre><p>Url path <code>/</code> will render <code>&lt;/Dashboard></code> or <code>&lt;Landing/></code> depending on user authentication state.
+Without authentication <code>/</code> will render <code>&lt;Landing/></code> component. With authentication <code>/</code> will render <code>&lt;Dashboard/></code> component.</p><blockquote>
+<p>Only authenticated user can access<code>&lt;Dashboard/></code></p></blockquote><h2 id=implementation>Implementation</h2><h3 id=prepare-the-environment>Prepare the Environment</h3><ol>
 <li>Install <a href=https://nodejs.org/en/download/>Node</a></li></ol><ol start=2>
-<li>Install <a href=https://classic.yarnpkg.com/en/>yarn</a> by running</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zsh data-lang=zsh><span style=display:flex><span>npm install --global yarn
-</span></span></code></pre></div><h3 id=create-a-vue-project>Create a Vue project</h3><p>We can create a fresh <code>Vite</code>+<code>Vue</code> project by running</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zsh data-lang=zsh><span style=display:flex><span>yarn create vite vue-firebase --template vue
-</span></span></code></pre></div><p>The newly created project directory structure.</p><pre tabindex=0><code>├── README.md
+<li>Install <a href=https://classic.yarnpkg.com/en/>yarn</a> by running</li></ol><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh><span style=display:flex><span>npm install --global yarn
+</span></span></code></pre></td></tr></table></div></div><h3 id=create-a-vue-project>Create a Vue project</h3><p>We can create a fresh <code>Vite</code>+<code>Vue</code> project by running</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh><span style=display:flex><span>yarn create vite vue-firebase --template vue
+</span></span></code></pre></td></tr></table></div></div><p>The newly created project directory structure.</p><pre tabindex=0><code>├── README.md
 ├── index.html
 ├── package.json
 ├── public
@@ -72,8 +84,32 @@ Without authentication <code>/</code> will render <code>&lt;Landing/></code> com
 │   │   └── HelloWorld.vue
 │   └── main.js
 └── vite.config.js
-</code></pre><h3 id=add-dependencies-to-the-vue-project>Add dependencies to the vue project</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zsh data-lang=zsh><span style=display:flex><span>yarn add -D firebase vue-router vuex
-</span></span></code></pre></div><h3 id=create-a-firebase-project>Create a Firebase project</h3><p>To link our web app with firebase we need some configuration values which will be provided by firebase.</p><p>To generate the configuration values we need to add an web app to the project by clicking on the following button.</p><p>Once the web app is created we will have the following configuration available to us.</p><p>To connect connect firebase to our newly create vue project we will create a <code>firebase.js</code> file in src with following code.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#75715e>// Import the functions you need from the SDKs you need
+</code></pre><h3 id=add-dependencies-to-the-vue-project>Add dependencies to the vue project</h3><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh><span style=display:flex><span>yarn add -D firebase vue-router vuex
+</span></span></code></pre></td></tr></table></div></div><h3 id=create-a-firebase-project>Create a Firebase project</h3><p>To link our web app with firebase we need some configuration values which will be provided by firebase.</p><p>To generate the configuration values we need to create a new firebase project and add an web app to the project by clicking on the following button.</p><p>Once the web app is created we will have the required configuration available to us.</p><p>To connect connect firebase to our newly created vue project we will create a <code>firebase.js</code> file in <code>src</code> with following code.</p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style=background-color:#3c3d38><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span></span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#75715e>// Import the functions you need from the SDKs you need
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>initializeApp</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;firebase/app&#34;</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>getAuth</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;firebase/auth&#34;</span>;
 </span></span><span style=display:flex><span>
@@ -89,22 +125,158 @@ Without authentication <code>/</code> will render <code>&lt;Landing/></code> com
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>// Initialize Firebase
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>app</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>initializeApp</span>(<span style=color:#a6e22e>firebaseConfig</span>);
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>auth</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>getAuth</span>(<span style=color:#a6e22e>app</span>);
-</span></span></code></pre></div><p>The main objective of <code>firebase.js</code> fire is to export the <code>auth</code> object which will be used for authentication.</p><h3 id=create-vue-components>Create Vue Components</h3><p><code>Landing.vue</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span>&lt;<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex;background-color:#3c3d38><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>auth</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>getAuth</span>(<span style=color:#a6e22e>app</span>);
+</span></span></code></pre></td></tr></table></div></div><p>The main objective of <code>firebase.js</code> fire is to export the <code>auth</code> object which will be used for the authentication.</p><h3 id=create-vue-components>Create Vue Components</h3><p>First we create two are very simple components in <code>Landing.vue</code> and <code>Dashboard.vue</code>.</p><div class=highlight filename=Landing.vue><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-vue data-lang=vue><span style=display:flex><span>&lt;<span style=color:#f92672>script</span>&gt;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> {}
 </span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>script</span>&gt;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>&lt;<span style=color:#f92672>template</span>&gt;
 </span></span><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt; <span style=color:#a6e22e>Welcome</span> <span style=color:#a6e22e>to</span> <span style=color:#a6e22e>the</span> <span style=color:#a6e22e>landing</span> <span style=color:#a6e22e>page</span><span style=color:#f92672>!</span>&lt;/<span style=color:#f92672>h1</span>&gt;
 </span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>template</span>&gt;
-</span></span></code></pre></div><p><code>Dashboard.vue</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span>&lt;<span style=color:#f92672>script</span>&gt;
+</span></span></code></pre></td></tr></table></div></div><div class=highlight filename=Dashboard.vue><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">7
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-vue data-lang=vue><span style=display:flex><span>&lt;<span style=color:#f92672>script</span>&gt;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> {}
 </span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>script</span>&gt;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>&lt;<span style=color:#f92672>template</span>&gt;
 </span></span><span style=display:flex><span>&lt;<span style=color:#f92672>h1</span>&gt; <span style=color:#a6e22e>Welcome</span> <span style=color:#a6e22e>to</span> <span style=color:#a6e22e>your</span> <span style=color:#a6e22e>dashboard</span><span style=color:#f92672>!</span>&lt;/<span style=color:#f92672>h1</span>&gt;
 </span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>template</span>&gt;
-</span></span></code></pre></div><p><code>Login.vue</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span>&lt;<span style=color:#f92672>script</span>&gt;
+</span></span></code></pre></td></tr></table></div></div><p>To allow users to register in out web app we need to create a registration form.
+We create a very simple registration form with <code>username</code>, <code>email</code> and <code>password</code> inputs. When the user clicks on the <code>Register</code> button the <code>onRegister</code> function is called.</p><div class=highlight filename=Register.vue><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style=background-color:#3c3d38><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span></span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style=background-color:#3c3d38><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span></span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code class=language-vue data-lang=vue><span style=display:flex><span>&lt;<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> {
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>data</span>() {
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>			<span style=color:#a6e22e>username</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&#39;</span>,
+</span></span><span style=display:flex><span>			<span style=color:#a6e22e>email</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&#39;</span>,
+</span></span><span style=display:flex><span>			<span style=color:#a6e22e>password</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&#39;</span>,
+</span></span><span style=display:flex><span>			<span style=color:#a6e22e>registering</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	},
+</span></span><span style=display:flex><span>	<span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex;background-color:#3c3d38><span>		<span style=color:#a6e22e>onRegister</span>(<span style=color:#a6e22e>e</span>) {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>			<span style=color:#75715e>// register code
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>template</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>article</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;register-form&#34;</span>&gt;
+</span></span><span style=display:flex><span>	&lt;<span style=color:#f92672>form</span>&gt;
+</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;username&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;username&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;username&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Username&#34;</span> <span style=color:#a6e22e>required</span> <span style=color:#f92672>v-model</span><span style=color:#e6db74>=&#34;username&#34;</span>&gt;
+</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Email address&#34;</span> <span style=color:#a6e22e>required</span> <span style=color:#f92672>v-model</span><span style=color:#e6db74>=&#34;email&#34;</span>&gt;
+</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Password&#34;</span> <span style=color:#a6e22e>required</span> <span style=color:#f92672>v-model</span><span style=color:#e6db74>=&#34;password&#34;</span>&gt;
+</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>button</span>
+</span></span><span style=display:flex><span>			<span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;submit&#34;</span> <span style=color:#f92672>:aria-busy</span><span style=color:#e6db74>=&#34;registering&#34;</span> <span style=color:#f92672>:</span><span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{secondary: registering}&#34;</span>
+</span></span><span style=display:flex><span>			<span style=color:#f92672>@click.prevent</span><span style=color:#e6db74>=&#34;onRegister($event)&#34;</span>
+</span></span><span style=display:flex><span>		&gt;
+</span></span><span style=display:flex;background-color:#3c3d38><span>			<span style=color:#a6e22e>Register</span>
+</span></span><span style=display:flex><span>		&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>	&lt;/<span style=color:#f92672>form</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	&lt;<span style=color:#f92672>router-link</span> <span style=color:#a6e22e>to</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/login&#34;</span> <span style=color:#f92672>:aria-disabled</span><span style=color:#e6db74>=&#34;registering&#34;</span>&gt;<span style=color:#a6e22e>Login</span><span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/router-link&gt;</span>
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>article</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>template</span>&gt;
+</span></span></code></pre></td></tr></table></div></div><p>Once the registration is done the user will try to login. So we implement a simple login form with <code>username</code> and <code>password</code> inputs. When the user clicks on the <code>Login</code> button the <code>onLogin</code> function is called.</p><div class=highlight filename=Login.vue><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style=background-color:#3c3d38><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style=background-color:#3c3d38><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span></span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code class=language-vue data-lang=vue><span style=display:flex><span>&lt;<span style=color:#f92672>script</span>&gt;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> {
 </span></span><span style=display:flex><span>	<span style=color:#a6e22e>data</span>() {
 </span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> {
@@ -114,9 +286,7 @@ Without authentication <code>/</code> will render <code>&lt;Landing/></code> com
 </span></span><span style=display:flex><span>		}
 </span></span><span style=display:flex><span>	},
 </span></span><span style=display:flex><span>	<span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span> {
-</span></span><span style=display:flex><span>		<span style=color:#a6e22e>onLogin</span>(<span style=color:#a6e22e>e</span>) {
-</span></span><span style=display:flex><span>			<span style=color:#75715e>// prevent default behavior
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>			<span style=color:#a6e22e>e</span>.<span style=color:#a6e22e>preventDefault</span>();
+</span></span><span style=display:flex;background-color:#3c3d38><span>		<span style=color:#a6e22e>onLogin</span>(<span style=color:#a6e22e>e</span>) {
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>			<span style=color:#75715e>// login code
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
@@ -128,47 +298,59 @@ Without authentication <code>/</code> will render <code>&lt;Landing/></code> com
 </span></span><span style=display:flex><span>&lt;<span style=color:#f92672>template</span>&gt;
 </span></span><span style=display:flex><span>&lt;<span style=color:#f92672>article</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;login-form&#34;</span>&gt;
 </span></span><span style=display:flex><span>	&lt;<span style=color:#f92672>form</span>&gt;
-</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Email address&#34;</span> <span style=color:#a6e22e>required</span>&gt;
-</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Password&#34;</span> <span style=color:#a6e22e>required</span>&gt;
-</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;submit&#34;</span> <span style=color:#f92672>@click</span><span style=color:#e6db74>=&#34;onLogin($event)&#34;</span> <span style=color:#f92672>:aria-busy</span><span style=color:#e6db74>=&#34;isAuthenticating&#34;</span> <span style=color:#f92672>:</span><span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{secondary: isAuthenticating}&#34;</span>&gt;<span style=color:#a6e22e>Login</span>&lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Email address&#34;</span> <span style=color:#a6e22e>required</span> /&gt;
+</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;password&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Password&#34;</span> <span style=color:#a6e22e>required</span> /&gt;
+</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>button</span>
+</span></span><span style=display:flex><span>			<span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;submit&#34;</span> <span style=color:#f92672>:aria-busy</span><span style=color:#e6db74>=&#34;isAuthenticating&#34;</span> <span style=color:#f92672>:</span><span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;{secondary: isAuthenticating}&#34;</span>
+</span></span><span style=display:flex><span>			<span style=color:#f92672>@click.prevent</span><span style=color:#e6db74>=&#34;onLogin($event)&#34;</span>
+</span></span><span style=display:flex><span>		&gt;
+</span></span><span style=display:flex;background-color:#3c3d38><span>			<span style=color:#a6e22e>Login</span>
+</span></span><span style=display:flex><span>		&lt;/<span style=color:#f92672>button</span>&gt;
 </span></span><span style=display:flex><span>	&lt;/<span style=color:#f92672>form</span>&gt;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>	&lt;<span style=color:#f92672>router-link</span> <span style=color:#a6e22e>to</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/register&#34;</span> <span style=color:#f92672>:aria-disabled</span><span style=color:#e6db74>=&#34;isAuthenticating&#34;</span>&gt;<span style=color:#a6e22e>Register</span><span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/router-link&gt;</span>
 </span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>article</span>&gt;
 </span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>template</span>&gt;
-</span></span></code></pre></div><p><code>Register.vue</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span>&lt;<span style=color:#f92672>script</span>&gt;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> {
-</span></span><span style=display:flex><span>	<span style=color:#a6e22e>data</span>() {
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> {
-</span></span><span style=display:flex><span>			<span style=color:#a6e22e>username</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&#39;</span>,
-</span></span><span style=display:flex><span>			<span style=color:#a6e22e>email</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&#39;</span>,
-</span></span><span style=display:flex><span>			<span style=color:#a6e22e>password</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&#39;</span>,
-</span></span><span style=display:flex><span>			<span style=color:#a6e22e>registering</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>false</span>
-</span></span><span style=display:flex><span>		}
-</span></span><span style=display:flex><span>	},
-</span></span><span style=display:flex><span>	<span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span> {
-</span></span><span style=display:flex><span>		<span style=color:#a6e22e>onRegister</span>(<span style=color:#a6e22e>e</span>) {
-</span></span><span style=display:flex><span>			<span style=color:#75715e>// prevent default behavior
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>			<span style=color:#a6e22e>e</span>.<span style=color:#a6e22e>preventDefault</span>();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>			<span style=color:#75715e>// register code
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span>		}
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>template</span>&gt;
-</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>article</span> <span style=color:#a6e22e>class</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;register-form&#34;</span>&gt;
-</span></span><span style=display:flex><span>	&lt;<span style=color:#f92672>form</span>&gt;
-</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;username&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;username&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;username&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Username&#34;</span> <span style=color:#a6e22e>required</span> <span style=color:#f92672>v-model</span><span style=color:#e6db74>=&#34;username&#34;</span>&gt;
-</span></span><span style=display:flex><span>		&lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;email&#34;</span> <span style=color:#a6e22e>placeholder</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Email address&#34;</span> <span style=color:#a6e22e>required</span> <span style=color:#f92672>v-model</span><span style=color:#e6db74>=&#34;email&#34; &gt;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>		&lt;input type=&#34;password&#34; id=&#34;password&#34; name=&#34;password&#34; placeholder=&#34;Password&#34; required v-model=&#34;password&#34;&gt;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>		&lt;button type=&#34;submit&#34; @click=&#34;onRegister($event)&#34; :aria-busy=&#34;registering&#34; :class=&#34;{secondary: registering}&#34;&gt;Register&lt;/button&gt;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>	&lt;/form&gt;
-</span></span></span><span style=display:flex><span><span style=color:#e6db74>	&lt;router-link to=&#34;/login&#34; :aria-disabled=&#34;registering&#34;</span>&gt;<span style=color:#a6e22e>Login</span><span style=color:#960050;background-color:#1e0010>&lt;/</span><span style=color:#a6e22e>router</span><span style=color:#f92672>-link</span>&gt;
-</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>article</span>&gt;
-</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>template</span>&gt;
-</span></span></code></pre></div><h3 id=add-state-management>Add State Management</h3><p>We are using <a href=https://vuex.vuejs.org/>vuex</a> for state management.<br>
-To setup the vuex store we put the following code in <code>store.js</code>.</p><p><code>store.js</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>createStore</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;vuex&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>We kept the above components purposefully very simple. The Login and Registration forms has</p><h3 id=add-state-management>Add State Management</h3><p>We are using <a href=https://vuex.vuejs.org/>vuex</a> for state management.<br>
+To setup the vuex store we put the following code in <code>store.js</code>.</p><div class=highlight filename=store.js><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>createStore</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;vuex&#39;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#75715e>// Create a new store instance.
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>store</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createStore</span>({
@@ -203,16 +385,58 @@ To setup the vuex store we put the following code in <code>store.js</code>.</p><
 </span></span><span style=display:flex><span>})
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>store</span>;
-</span></span></code></pre></div><p>Next we update the <code>main.js</code> as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>app</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createApp</span>(<span style=color:#a6e22e>App</span>);
+</span></span></code></pre></td></tr></table></div></div><p>To connect the vuex <strong>store</strong> to out web app we update the <code>main.js</code> as follows.</p><div class=highlight filename=store.js><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style=background-color:#3c3d38><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span></span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>app</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createApp</span>(<span style=color:#a6e22e>App</span>);
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>app</span>.<span style=color:#a6e22e>use</span>(<span style=color:#a6e22e>store</span>); <span style=color:#75715e>// this is added
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>app</span>.<span style=color:#a6e22e>mount</span>(<span style=color:#e6db74>&#39;#app&#39;</span>);
-</span></span></code></pre></div><h3 id=add-routes>Add Routes</h3><p>We are using <a href=https://router.vuejs.org/>vue-router</a> for route management.
-To create a mapping of <code>url path => Vue component</code> using vue-router we create a <code>routes.js</code>.</p><p><code>routes.js</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>createRouter</span>, <span style=color:#a6e22e>createWebHistory</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;vue-router&#39;</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Dashboard</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./components/Dashboard.vue&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Login</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./components/Login.vue&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Register</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./components/Register.vue&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Landing</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./components/Landing.vue&#39;</span>
+</span></span><span style=display:flex;background-color:#3c3d38><span><span style=color:#a6e22e>app</span>.<span style=color:#a6e22e>use</span>(<span style=color:#a6e22e>store</span>); <span style=color:#75715e>// +
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>app</span>.<span style=color:#a6e22e>mount</span>(<span style=color:#e6db74>&#39;#app&#39;</span>);
+</span></span></code></pre></td></tr></table></div></div><h3 id=add-routes>Add Routes</h3><p>We will use <a href=https://router.vuejs.org/>vue-router</a> for route management.
+vue-router provides many features but the most important one is routes mapping.<br>
+To create a mapping of <code>url path => Vue component</code> we create a <code>routes.js</code>.</p><p><code>routes.js</code></p><div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>createRouter</span>, <span style=color:#a6e22e>createWebHistory</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;vue-router&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Dashboard</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./components/Dashboard.vue&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Login</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./components/Login.vue&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Register</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./components/Register.vue&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Landing</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./components/Landing.vue&#39;</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>store</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./store&#39;</span>;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>router</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createRouter</span>({
@@ -237,10 +461,37 @@ To create a mapping of <code>url path => Vue component</code> using vue-router w
 </span></span><span style=display:flex><span>		},
 </span></span><span style=display:flex><span>	]
 </span></span><span style=display:flex><span>});
-</span></span></code></pre></div><p>Here we can directly access <code>authState</code> from store to check if the user is already authenticated and render appropriate component.</p><p>To connect the router with the app we update the <code>main.js</code> as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>app</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createApp</span>(<span style=color:#a6e22e>App</span>)
+</span></span></code></pre></td></tr></table></div></div><p>Here we can directly access <code>authState</code> from store to check if the user is already authenticated and render appropriate component.</p><p>To connect the <strong>router</strong> with the app we update the <code>main.js</code> as follows.</p><div class=highlight filename=store.js><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid>
+<table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style=background-color:#3c3d38><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span></span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:2;-o-tab-size:2;tab-size:2;display:grid><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>app</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createApp</span>(<span style=color:#a6e22e>App</span>)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>app</span>.<span style=color:#a6e22e>use</span>(<span style=color:#a6e22e>store</span>);
-</span></span><span style=display:flex><span><span style=color:#a6e22e>app</span>.<span style=color:#a6e22e>use</span>(<span style=color:#a6e22e>router</span>); <span style=color:#75715e>// this is added
+</span></span><span style=display:flex;background-color:#3c3d38><span><span style=color:#a6e22e>app</span>.<span style=color:#a6e22e>use</span>(<span style=color:#a6e22e>router</span>); <span style=color:#75715e>// +
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>app</span>.<span style=color:#a6e22e>mount</span>(<span style=color:#e6db74>&#39;#app&#39;</span>)
-</span></span></code></pre></div><h3 id=add-authentication>Add Authentication</h3><h4 id=1-route-management>1. Route management</h4><h4 id=2-state-management>2. State management</h4><h2 id=summary>Summary</h2></article></div></div></main></body></html>
+</span></span></code></pre></td></tr></table></div></div><h3 id=add-authentication>Add Authentication</h3><h4 id=route-management>Route management</h4><h4 id=state-management>State management</h4><h2 id=summary>Summary</h2><p>Final directory structure (irrelevant files are omitted).</p><pre tabindex=0><code>├── README.md
+├── index.html
+├── package.json
+├── src
+│   ├── App.vue
+│   ├── components
+│   │   ├── Dashboard.vue
+│   │   ├── Landing.vue
+│   │   ├── Login.vue
+│   │   └── Register.vue
+│   ├── fireabase.js
+│   ├── main.js
+│   ├── routes.js
+│   └── store.js
+└── vite.config.js
+</code></pre><p>We have created <strong>four</strong> vue components in <code>src/components</code> directory.
+The mapping from url path to component is in <code>routes.js</code>.
+<code>firebase.js</code> contains the firebase related code. Finally we manage minimal user state in <code>store.js</code>.</p><p>User can try to visit either <code>/</code> <code>/login</code>, <code>/register</code> or any other path.</p><p>Unauthenticated user can visit first 3 paths and the <code>routes.js</code> will render the mapped component.
+If he tries to visit any other path he will be redirected to <code>/login</code>.</p><p>When a authenticated user tries to visit <code>/</code> the web app will render <code>Dashboard</code> component.If he tries to visit <code>/login</code> or <code>/register</code> path he will be redirected to <code>/</code> and lang in Dashboard.</p></article></div></div></main></body></html>

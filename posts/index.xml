@@ -12,9 +12,7 @@
       <pubDate>Sun, 01 May 2022 21:54:00 +0530</pubDate>
       
       <guid>https://minorblocker.com/posts/vue/firebase/</guid>
-      <description>Introduction Firebase provides a SDK to easily integrate the auth service into our web app.
-The user credentials are collected using the web app. The credentials are sent to firebase via SDK. Firebase takes care of storing the user information on registration and authentication.
-Goals  We want to implement an vue app with authentication.  User should be able to view only some sections our web app without authentication. If an unauthenticated user tries to view app sections which require authentication he will be redirected to the login page.</description>
+      <description>Authentication is one of the basic requirement of all web application. We will setup app authentication with firebase. Along the way we will discover how easy it is to integrate once we understand the different pieces work together.</description>
     </item>
     
   </channel>
