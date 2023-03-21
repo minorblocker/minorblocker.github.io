@@ -6,47 +6,51 @@ import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 
+import mdx from "@astrojs/mdx";
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  outDir: 'build',
+  server: {
+    port: 6006
+  },
+  outDir: 'dist',
   integrations: [
     tailwind({
       config: {
-        applyBaseStyles: false,
-      },
+        applyBaseStyles: false
+      }
     }),
     react(),
     sitemap(),
+    mdx({})
   ],
   markdown: {
     remarkPlugins: [
-      remarkToc,
-      [
-        remarkCollapse,
-        {
-          test: "Table of contents",
-        },
-      ],
+      remarkToc, [
+        remarkCollapse, {
+          test: "Table of contents"
+        }
+      ]
     ],
     shikiConfig: {
       theme: "one-dark-pro",
-      wrap: true,
+      wrap: true
     },
-    extendDefaultPlugins: true,
+    extendDefaultPlugins: true
   },
   vite: {
     optimizeDeps: {
-      exclude: ["@resvg/resvg-js"],
+      exclude: ["@resvg/resvg-js"]
     },
     build: {
       rollupOptions: {
         output: {
           entryFileNames: 'entry.[hash].js',
           chunkFileNames: 'chunks/chunk.[hash].js',
-          assetFileNames: 'assets/asset.[hash][extname]',
-        },
-      },
-    },
-  },
+          assetFileNames: 'assets/asset.[hash][extname]'
+        }
+      }
+    }
+  }
 });
