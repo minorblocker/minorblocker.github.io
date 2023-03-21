@@ -10,6 +10,7 @@ import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
+import MinorHeader from "@components/MinorHeader.astro";
 
 const posts = await getCollection("blog");
 
@@ -20,11 +21,10 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout>
-  <Header />
+  <MinorHeader />
   <main id="main-content">
-
     <section id="recent-posts">
-      <h2>Recent Posts</h2>
+      <!-- <h2>Recent Posts</h2> -->
       <ul>
         {
           sortedPosts.map(
@@ -57,6 +57,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
 <style>
   /* ===== Hero Section ===== */
+
   #hero {
     @apply pt-8 pb-6;
   }
@@ -82,7 +83,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   /* ===== Featured & Recent Posts Sections ===== */
   #featured,
   #recent-posts {
-    @apply pt-12 pb-6;
+    @apply pt-6 pb-6;
   }
   #featured h2,
   #recent-posts h2 {

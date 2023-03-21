@@ -124,3 +124,22 @@
     @apply outline-2 outline-offset-1 outline-skin-fill focus-visible:no-underline focus-visible:outline-dashed;
   }
 }
+
+#main-content {
+  @apply pt-10;
+  z-index: 0;
+}
+
+.post-card-title {
+  font-size: 20px;
+  @apply pb-1;
+}
+
+.post-date-time {
+  font-size: 12px!important;
+  @apply pt-2;
+}
+
+.post-card-footer {
+  color: #aaa;
+}

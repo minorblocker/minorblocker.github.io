@@ -1,0 +1,37 @@
+---
+import { SITE } from "@config";
+
+const { activeNav } = Astro.props;
+---
+
+<header>
+	<div class="nav-container">
+		<a href="/" class="logo"><div class="site-title">{SITE.title}</div></a>
+	</div>
+</header>
+
+<style>
+header {
+	position: fixed;
+	height: 56px;
+	width: 100%;
+	top: 0;
+	box-shadow: 0 0 30px #ddd;
+	@apply flex items-center justify-center;
+	background: #fff;
+	z-index: 1000;
+	font-family: serif;
+}
+.nav-container {
+	@apply mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row px-3;
+	flex: 1;
+}
+
+a {}
+
+.site-title {
+	font-weight: 500;
+	font-size: 30px;
+	/* color: #222; */
+}
+</style>
