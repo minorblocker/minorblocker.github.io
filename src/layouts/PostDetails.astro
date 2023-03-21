@@ -1,0 +1,56 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Tag from "@components/Tag.astro";
+import Datetime from "@components/Datetime";
+import type { CollectionEntry } from "astro:content";
+import MinorHeader from "@components/MinorHeader.astro";
+
+export interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+
+const { title, author, description, ogImage, pubDatetime, tags } = post.data;
+
+const { Content } = await post.render();
+
+const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
+  .href;
+---
+
+<Layout title={title} author={author} description={description} ogImage={ogUrl}>
+  <MinorHeader />
+  <!-- <Header /> -->
+
+  <main id="main-content">
+    <h1 class="post-title">{title}</h1>
+    <Datetime datetime={pubDatetime} size="sm" className="my-2" />
+    <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
+      <Content />
+    </article>
+
+    <ul class="tags-container">
+      {tags.map((tag) => <Tag name={tag} />)}
+    </ul>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    @apply mx-auto w-full max-w-3xl px-4 pb-12;
+  }
+  #main-content {
+    @apply pt-24;
+    z-index: 0;
+  }
+  .post-title {
+    @apply text-2xl font-semibold text-skin-accent;
+  }
+  .tags-container {
+    @apply my-8;
+  }
+</style>

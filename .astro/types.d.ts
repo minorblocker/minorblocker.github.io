@@ -75,8 +75,94 @@ declare module 'astro:content' {
 	>;
 
 	const entryMap: {
-		
+		"blog": {
+"adding-new-post.md": {
+  id: "adding-new-post.md",
+  slug: "adding-new-post",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"astro-paper-2.md": {
+  id: "astro-paper-2.md",
+  slug: "astro-paper-2",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"customizing-astropaper-theme-color-schemes.md": {
+  id: "customizing-astropaper-theme-color-schemes.md",
+  slug: "customizing-astropaper-theme-color-schemes",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"dynamic-og-images.md": {
+  id: "dynamic-og-images.md",
+  slug: "dynamic-og-images",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"how-to-configure-astropaper-theme.md": {
+  id: "how-to-configure-astropaper-theme.md",
+  slug: "how-to-configure-astropaper-theme",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"how-to-connect-astro-paper-blog-with-forestry-cms.md": {
+  id: "how-to-connect-astro-paper-blog-with-forestry-cms.md",
+  slug: "how-to-connect-astro-paper-blog-with-forestry-cms",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"portfolio-website-development.md": {
+  id: "portfolio-website-development.md",
+  slug: "portfolio-website-development",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"predefined-color-schemes.md": {
+  id: "predefined-color-schemes.md",
+  slug: "predefined-color-schemes",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"rec-2.md": {
+  id: "rec-2.md",
+  slug: "rec-2",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"tailwind-typography.md": {
+  id: "tailwind-typography.md",
+  slug: "tailwind-typography",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"terminal-development.md": {
+  id: "terminal-development.md",
+  slug: "terminal-development",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+"wheels-of-time.md": {
+  id: "wheels-of-time.md",
+  slug: "wheels-of-time",
+  body: string,
+  collection: "blog",
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] },
+},
+
 	};
 
-	type ContentConfig = never;
+	type ContentConfig = typeof import("../src/content/config");
 }
