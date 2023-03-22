@@ -23,10 +23,29 @@ function setPreference() {
   reflectPreference();
 }
 
+// https://github.com/giscus/giscus/issues/336
+function changeGiscusTheme() {
+  const theme = themeValue === 'dark' ? 'dark' : 'light'
+
+  function sendMessage(message) {
+    const iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+  }
+
+  sendMessage({
+    setConfig: {
+      theme: theme
+    }
+  });
+}
+
 function reflectPreference() {
   document.firstElementChild.setAttribute("data-theme", themeValue);
 
   document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
+
+  changeGiscusTheme()
 }
 
 // set early so no page flashes / CSS is made aware
