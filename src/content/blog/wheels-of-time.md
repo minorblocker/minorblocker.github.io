@@ -9,12 +9,6 @@ ogImage: https://user-images.githubusercontent.com/53733092/215771435-25408246-2
 tags:
   - system
   - operating-system
-description: ...
+description: Algorithm to create efficient timer
 ---
 
-...
-```ts
-function name() {
-
-}
-```

@@ -8,6 +8,28 @@ import { SITE } from "./src/config";
 import image from '@astrojs/image';
 import mdx from "@astrojs/mdx";
 import { astroImageTools } from "astro-imagetools";
+import rehypePrettyCode from "rehype-pretty-code";
+
+const prettyCodeOptions = {
+  theme: "one-dark-pro",
+  onVisitLine(node) {
+    if (node.children.length === 0) {
+      node.children = [
+        {
+          type: "text",
+          value: " ",
+        },
+      ];
+    }
+  },
+  onVisitHighlightedLine(node) {
+    node.properties.className.push("highlighted");
+  },
+  onVisitHighlightedWord(node) {
+    node.properties.className = ["word"];
+  },
+  tokensMap: {},
+};
 
 // https://astro.build/config
 export default defineConfig({
@@ -38,10 +60,13 @@ export default defineConfig({
         }
       ]
     ],
-    shikiConfig: {
-      theme: "one-dark-pro",
-      wrap: true
-    },
+    // shikiConfig: {
+    //   theme: "one-dark-pro",
+    //   wrap: true
+    // },
+    extendDefaultPlugins: true,
+    syntaxHighlight: false,
+    rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
     extendDefaultPlugins: true,
   },
   vite: {

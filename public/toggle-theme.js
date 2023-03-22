@@ -54,9 +54,39 @@ function reflectPreference() {
 // set early so no page flashes / CSS is made aware
 reflectPreference();
 
+function addCodyCopy() {
+  const copyButtonLabel = "Copy";
+
+  // use a class selector if available
+  let blocks = document.querySelectorAll("pre");
+
+  blocks.forEach((block) => {
+    // only add button if browser supports Clipboard API
+    if (navigator.clipboard) {
+      let button = document.createElement("button");
+      button.setAttribute('class', 'code-copy')
+
+      button.innerText = copyButtonLabel;
+      block.appendChild(button);
+
+      button.addEventListener("click", async () => {
+        await copyCode(block);
+      });
+    }
+  });
+
+  async function copyCode(block) {
+    let code = block.querySelector("code");
+    let text = code.innerText;
+
+    await navigator.clipboard.writeText(text);
+  }
+}
+
 window.onload = () => {
   // set on load so screen readers can get the latest value on the button
   reflectPreference();
+  addCodyCopy();
 
   // now this script can find and listen for clicks on the control
   document.querySelector("#theme-btn")?.addEventListener("click", () => {

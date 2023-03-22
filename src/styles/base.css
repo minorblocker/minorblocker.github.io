@@ -143,3 +143,64 @@
 .post-card-footer {
   color: #aaa;
 }
+
+pre {
+  position: relative;
+  /* margin: 5px 0; */
+  padding: 1rem 0 1rem 1rem;
+
+  /* more stuff */
+}
+
+pre[class*="astro-code"] button {
+  position: absolute;
+  /* top: 5px; */
+  /* right: 5px; */
+
+  /* more stuff */
+}
+
+.code-copy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.4rem 0.4rem;
+  font-size: 10px;
+  color: #999;
+  padding: 0px 4px;
+  border-radius: 4px;
+}
+
+.code-copy:active {
+  transform: translateY(2px);
+}
+
+/* div[data-rehype-pretty-code-fragment] {
+
+}
+[data-theme="light"] .code-copy {
+  border: 1px solid #555;
+} */
+
+[data-theme="light"] pre {
+  /* border: 1px solid rgba(var(--color-border), 1); */
+  background: #F1F3F4!important;
+}
+
+[data-theme="dark"] pre {
+  /* border: 1px solid rgba(var(--color-border), 1); */
+  background: #282C34!important;
+}
+
+/*
+pre>code {
+  display: grid;
+  background-color: red;
+}
+
+.highlighted {
+  background-color: red;
+  border-left-color: #60a5fa;
+  border-left-width: 3px;
+  border-left-style: solid;
+} */
