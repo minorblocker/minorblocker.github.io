@@ -1,0 +1,1 @@
+async function getMod(){return import("./chunk.e7fbec27.js")}let collectedLinks="@@ASTRO-LINKS@@",collectedStyles="@@ASTRO-STYLES@@",collectedScripts="@@ASTRO-SCRIPTS@@";export{collectedLinks,collectedScripts,collectedStyles,getMod};

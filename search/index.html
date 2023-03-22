@@ -34,7 +34,7 @@
     
 
     <script src="/toggle-theme.js"></script>
-  <link href="/assets/asset.2d4390bc.css" rel="stylesheet">
+  <link href="/assets/asset.38ac60b7.css" rel="stylesheet">
 <link href="/assets/asset.041c249c.css" rel="stylesheet">
 <link href="/assets/asset.2f926f6c.css" rel="stylesheet">
 <link href="/assets/asset.684bc69a.css" rel="stylesheet"><script type="module">const e=document.querySelector(".hamburger-menu"),n=document.querySelector("#menu-items")?.classList,t=document.querySelector(".icon-container")?.classList,o=document.querySelector("#first-line")?.classList,a=document.querySelector("#second-line ")?.classList,s=document.querySelector("#third-line")?.classList;e?.addEventListener("click",function(){"false"===e?.getAttribute("aria-expanded")?(e?.setAttribute("aria-expanded","true"),e?.setAttribute("aria-label","Close Menu"),n?.remove("display-none"),t?.remove("flex"),t?.add("relative"),o?.add("rotate-45","absolute","bottom-1/2"),s?.add("display-none"),a?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(e?.setAttribute("aria-expanded","false"),e?.setAttribute("aria-label","Open Menu"),n?.add("display-none"),t?.add("flex"),t?.remove("relative"),o?.remove("rotate-45","absolute","bottom-1/2"),s?.remove("display-none"),a?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});</script></head>
@@ -44,7 +44,18 @@
   <div class="astro-3EF6KSR2 nav-container">
     <div class="astro-3EF6KSR2 top-nav-wrap">
       <a class="astro-3EF6KSR2 logo" href="/">
-        MB
+        <!-- {
+          LOGO_IMAGE.enable ? (
+            <img
+              src={LOGO_IMAGE.svg ? logoSVG : logoPNG}
+              alt="AstroPaper Logo"
+              width={LOGO_IMAGE.width}
+              height={LOGO_IMAGE.height}
+            />
+          ) : (
+            SITE.title
+          )
+        } -->
       </a>
       <nav class="astro-3EF6KSR2" id="nav-menu">
         <button aria-label="Open Menu" class="astro-3EF6KSR2 focus-outline hamburger-menu" aria-controls="menu-items" aria-expanded="false">
@@ -96,7 +107,7 @@
 </header><!-- <Breadcrumbs /> --><main class="astro-HSP6OTUF" id="main-content">
   <!-- <h1>{pageTitle}</h1> -->
   <p class="astro-HSP6OTUF">Search any article ...</p>
-  <astro-island await-children client="load" component-export="default" component-url="/entry.8a715329.js" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:true}" props="{&quot;searchList&quot;:[1,&quot;[[0,{\&quot;title\&quot;:[0,\&quot;GFS\&quot;],\&quot;description\&quot;:[0,\&quot;DS\&quot;],\&quot;data\&quot;:[0,{\&quot;author\&quot;:[0,\&quot;Subhasis Maity\&quot;],\&quot;pubDatetime\&quot;:[3,\&quot;2022-09-23T15:22:00.000Z\&quot;],\&quot;title\&quot;:[0,\&quot;GFS\&quot;],\&quot;postSlug\&quot;:[0,\&quot;gfs-paper\&quot;],\&quot;featured\&quot;:[0,true],\&quot;draft\&quot;:[0,false],\&quot;tags\&quot;:[1,\&quot;[[0,\\\&quot;paper\\\&quot;],[0,\\\&quot;storage\\\&quot;],[0,\\\&quot;distributed-systems\\\&quot;]]\&quot;],\&quot;description\&quot;:[0,\&quot;DS\&quot;]}]}],[0,{\&quot;title\&quot;:[0,\&quot;Wheels of Time\&quot;],\&quot;description\&quot;:[0,\&quot;...\&quot;],\&quot;data\&quot;:[0,{\&quot;author\&quot;:[0,\&quot;Sat Naing\&quot;],\&quot;pubDatetime\&quot;:[3,\&quot;2023-01-30T15:57:52.737Z\&quot;],\&quot;title\&quot;:[0,\&quot;Wheels of Time\&quot;],\&quot;postSlug\&quot;:[0,\&quot;wheels-of-time\&quot;],\&quot;featured\&quot;:[0,true],\&quot;draft\&quot;:[0,false],\&quot;tags\&quot;:[1,\&quot;[[0,\\\&quot;system\\\&quot;],[0,\\\&quot;operating-system\\\&quot;]]\&quot;],\&quot;ogImage\&quot;:[0,\&quot;https://user-images.githubusercontent.com/53733092/215771435-25408246-2309-4f8b-a781-1f3d93bdf0ec.png\&quot;],\&quot;description\&quot;:[0,\&quot;...\&quot;]}]}]]&quot;]}" renderer-url="/entry.0af3fb96.js" ssr uid="1TyH20"><label class="block relative"><span class="flex absolute inset-y-0 items-center left-0 opacity-75 pl-2"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"/></svg></span><input autocomplete="off" autofocus class="block bg-skin-fill border border-opacity-40 border-skin-fill focus:border-skin-accent focus:outline-none pl-10 placeholder:italic placeholder:text-opacity-75 pr-3 py-3 rounded w-full" name="search" placeholder="Search for anything..." type="text" value></label><ul></ul></astro-island>
+  <astro-island await-children client="load" component-export="default" component-url="/entry.8a715329.js" opts="{&quot;name&quot;:&quot;Search&quot;,&quot;value&quot;:true}" props="{&quot;searchList&quot;:[1,&quot;[[0,{\&quot;title\&quot;:[0,\&quot;Wheels of Time\&quot;],\&quot;description\&quot;:[0,\&quot;Algorithm to create efficient timer\&quot;],\&quot;data\&quot;:[0,{\&quot;author\&quot;:[0,\&quot;Sat Naing\&quot;],\&quot;pubDatetime\&quot;:[3,\&quot;2023-01-30T15:57:52.737Z\&quot;],\&quot;title\&quot;:[0,\&quot;Wheels of Time\&quot;],\&quot;postSlug\&quot;:[0,\&quot;wheels-of-time\&quot;],\&quot;featured\&quot;:[0,true],\&quot;draft\&quot;:[0,false],\&quot;tags\&quot;:[1,\&quot;[[0,\\\&quot;system\\\&quot;],[0,\\\&quot;operating-system\\\&quot;]]\&quot;],\&quot;ogImage\&quot;:[0,\&quot;https://user-images.githubusercontent.com/53733092/215771435-25408246-2309-4f8b-a781-1f3d93bdf0ec.png\&quot;],\&quot;description\&quot;:[0,\&quot;Algorithm to create efficient timer\&quot;]}]}]]&quot;]}" renderer-url="/entry.0af3fb96.js" ssr uid="1xzMXU"><label class="block relative"><span class="flex absolute inset-y-0 items-center left-0 opacity-75 pl-2"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"/></svg></span><input autocomplete="off" autofocus class="block bg-skin-fill border border-opacity-40 border-skin-fill focus:border-skin-accent focus:outline-none pl-10 placeholder:italic placeholder:text-opacity-75 pr-3 py-3 rounded w-full" name="search" placeholder="Search for anything..." type="text" value></label><ul></ul></astro-island>
 </main><footer class="astro-SZ7XMLTE mt-auto">
   <!-- <Hr noPadding />
   <div class="footer-wrapper">

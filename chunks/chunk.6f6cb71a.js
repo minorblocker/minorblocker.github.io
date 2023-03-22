@@ -1,1 +1,0 @@
-import{_ as e}from"./chunk.8ef09eaa.js";async function getMod(){return import("./chunk.20330b7f.js")}let collectedLinks="@@ASTRO-LINKS@@",collectedStyles="@@ASTRO-STYLES@@",collectedScripts="@@ASTRO-SCRIPTS@@";e(getMod,"astro:jsx");export{collectedLinks,collectedScripts,collectedStyles,getMod};
