@@ -1,3 +1,4 @@
+
 const primaryColorScheme = ""; // "light" | "dark"
 
 // Get theme data from local storage
@@ -25,7 +26,7 @@ function setPreference() {
 
 // https://github.com/giscus/giscus/issues/336
 function changeGiscusTheme() {
-  const theme = themeValue === 'dark' ? 'dark' : 'light'
+  const theme = themeValue === 'dark' ? 'dark_dimmed' : 'light'
 
   function sendMessage(message) {
     const iframe = document.querySelector('iframe.giscus-frame');
@@ -39,6 +40,8 @@ function changeGiscusTheme() {
     }
   });
 }
+
+
 
 function reflectPreference() {
   document.firstElementChild.setAttribute("data-theme", themeValue);

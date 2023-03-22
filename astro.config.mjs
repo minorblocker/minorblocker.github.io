@@ -37,7 +37,7 @@ export default defineConfig({
       theme: "one-dark-pro",
       wrap: true
     },
-    extendDefaultPlugins: true
+    extendDefaultPlugins: true,
   },
   vite: {
     optimizeDeps: {
